@@ -14,7 +14,22 @@
 	<packaging>war</packaging>
 	<name>demo</name>
 	<description>"Demonstrate how to protect rest API using json web token in Spring MVC"</description>
-
+	<licenses>
+		<license>
+			<name>MIT license</name>
+			<url>https://www.tikkidinh.com</url>
+		</license>
+	</licenses>
+	<developers>
+		<developer>
+			<name>Thinh Dinh</name>
+			<email>babyface1m75@yahoo.com.vn</email>
+			<roles>
+			    <role>Software Engineer</role>
+			    <role>Full Stack Developer</role>
+			</roles>
+		</developer>
+	</developers>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>

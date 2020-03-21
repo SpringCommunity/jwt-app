@@ -20,12 +20,17 @@
 
 ## Testing
 - **spring.security.user.name=dev** set default user for **Spring Security**
-- **spring.security.user.password=123456** set default password for **Spring Security**
+- **spring.security.user.password=99bbc2a8-70ba-4945-ac79-5da6c9eae268** set default password for **Spring Security**
 - **mvn spring-boot:run** starting project and open the following link **http://localhost:8080** using a browser.
 
 ## AWS demo user
 - **aktia-demo** username
 - **okGjrqLUb5adJ3bLwYlG2gO39XCRiI6wLuf+lhy0rH4=** password
+
+## Storing sourcecode on CodeCommit
+- **git init** navigate project's root folder and initialize git
+- **git remote add origin https://git-codecommit.us-east-1.amazonaws.com/v1/repos/jwt-app** declare a repository in git config file
+- **git add . && git commit -m "Initialized a spring boot project" && git push --set-upstream origin master** upload project to **CodeCommit** 
 
 ## Demo
 
