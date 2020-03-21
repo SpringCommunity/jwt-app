@@ -1,7 +1,13 @@
--- CREATE TABLE AKTIA_USER
+-- DROP ALL
 DROP SEQUENCE IF EXISTS aktia_user_seq;
-DROP TABLE IF EXISTS aktia_user;
+DROP SEQUENCE IF EXISTS aktia_role_seq;
+DROP SEQUENCE IF EXISTS aktia_permission_seq;
 
+DROP TABLE IF EXISTS aktia_permission CASCADE;
+DROP TABLE IF EXISTS aktia_user CASCADE;
+DROP TABLE IF EXISTS aktia_role CASCADE;
+
+-- CREATE TABLE AKTIA_USER
 CREATE SEQUENCE aktia_user_seq;
 CREATE TABLE aktia_user (
    id INTEGER NOT NULL DEFAULT nextval('aktia_user_seq') PRIMARY KEY,
@@ -17,8 +23,6 @@ INSERT INTO aktia_user(username, password, first_name, last_name) VALUES ('user'
 INSERT INTO aktia_user(username, password, first_name, last_name) VALUES ('admin', '$2a$08$lDnHPz7eUkSi6ao14Twuau08mzhWrL4kyZGGU5xfiGALO/Vxd5DOi', 'Mirja', 'Jaakkola');
 
 -- CREATE TABLE AKTIA_ROLE
-DROP SEQUENCE IF EXISTS aktia_role_seq;
-DROP TABLE IF EXISTS aktia_role;
 
 CREATE SEQUENCE aktia_role_seq;
 CREATE TABLE aktia_role (
@@ -29,9 +33,6 @@ CREATE TABLE aktia_role (
 INSERT INTO aktia_role(name) VALUES ('ROLE_USER'), ('ROLE_ADMIN');
 
 -- CREATE TABLE AKTIA_PERMISSION
-DROP SEQUENCE IF EXISTS aktia_permission_seq;
-DROP TABLE IF EXISTS aktia_permission;
-
 CREATE SEQUENCE aktia_permission_seq;
 CREATE TABLE aktia_permission (
    id INTEGER NOT NULL DEFAULT nextval('aktia_permission_seq') PRIMARY KEY,
