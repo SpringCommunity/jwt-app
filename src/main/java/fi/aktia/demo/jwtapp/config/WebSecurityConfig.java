@@ -30,6 +30,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+	
+	@Autowired
+	CustomAccessDeniedHandler customAccessDeniedHandler;
     
     @Autowired
     private AuthUserDetailsServiceImpl userDetailsService;
@@ -62,6 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.csrf().disable()
 			        .exceptionHandling()
 			        .authenticationEntryPoint(this.jwtAuthenticationEntryPoint)
+			        .accessDeniedHandler(this.customAccessDeniedHandler)
 			        
 			        .and()
 			        .sessionManagement()
@@ -72,10 +76,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			        .and()
 					.headers().cacheControl().disable();
 		
-		httpSecurity.authorizeRequests().antMatchers(HttpMethod.GET, "/").permitAll().and()
-		            .authorizeRequests().antMatchers("/h2/**").permitAll().and()
-		            .authorizeRequests().antMatchers("/auth/**").permitAll()
-		            .anyRequest().authenticated();
+		httpSecurity.authorizeRequests()
+		            .antMatchers(HttpMethod.GET, "/").permitAll()
+		            .antMatchers("/h2/**").permitAll()
+		            .antMatchers("/auth/**").permitAll()
+		            .antMatchers("/api/**").authenticated()
+		            ;
 		
 		httpSecurity.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 		

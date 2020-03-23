@@ -1,16 +1,13 @@
 package fi.aktia.demo.jwtapp.bean;
 
-import java.util.List;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -35,13 +32,9 @@ public class RoleBean {
 	@NotNull
 	private String roleName;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(
-			name= "aktia_permission",
-			joinColumns = {@JoinColumn(name = "fk_role_id", referencedColumnName = "id")},
-		    inverseJoinColumns = {@JoinColumn(name = "id", referencedColumnName = "id")}
-			)
-	private List<PermissionBean> permissions;
+
+	@OneToOne(mappedBy = "role")
+	private PermissionBean permission;
 	
 	public RoleBean() {
 		super();

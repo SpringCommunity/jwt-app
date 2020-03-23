@@ -17,6 +17,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @Author Thinh Dinh
  * @CreatedDate 24.03.2020
@@ -26,11 +28,13 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name= "aktia_user")
 public class UserBean {
+	
 	@Id
 	@Column(name= "id")
 	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator= "aktia_user_seq")
 	@SequenceGenerator(name = "aktia_user_seq", sequenceName = "aktia_user_seq", allocationSize = 1)
-    private int id;
+	@JsonIgnore
+	private int id;
 	
 	@Column(name= "username", length= 50, unique = true)
 	@NotNull
@@ -110,5 +114,14 @@ public class UserBean {
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
+
+	public List<PermissionBean> getPermissions() {
+		return permissions;
+	}
+	public void setPermissions(List<PermissionBean> permissions) {
+		this.permissions = permissions;
+	}
+	
+	
 	
 }

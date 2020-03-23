@@ -2,13 +2,16 @@ package fi.aktia.demo.jwtapp.bean;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -28,14 +31,16 @@ public class PermissionBean {
 	@Column(name= "id")
 	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator= "aktia_permission_seq")
 	@SequenceGenerator(name= "aktia_permission_seq", sequenceName = "aktia_permission_seq", allocationSize = 1)
+	@JsonIgnore
 	private int id;
 	
 	@ManyToMany(mappedBy = "permissions", fetch = FetchType.LAZY)
+	@JsonIgnore
 	private List<UserBean> users;
 	
-	@ManyToMany(mappedBy = "permissions", fetch = FetchType.LAZY)
-	@JsonIgnore
-	private List<RoleBean> roles;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "fk_role_id", referencedColumnName = "id")
+	private RoleBean role;
 
 	public PermissionBean() {
 		super();
@@ -63,13 +68,12 @@ public class PermissionBean {
 		this.users = users;
 	}
 
-	public List<RoleBean> getRoles() {
-		return roles;
+	public RoleBean getRole() {
+		return role;
 	}
 
-	public void setRoles(List<RoleBean> roles) {
-		this.roles = roles;
+	public void setRole(RoleBean role) {
+		this.role = role;
 	}
-	
 	
 }
