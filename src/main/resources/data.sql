@@ -19,8 +19,8 @@ CREATE TABLE aktia_user (
    created_date TIMESTAMP DEFAULT now()
 );
 
-INSERT INTO aktia_user(username, password, first_name, last_name) VALUES ('user', '$2y$12$xGykXS6w0fpGCvdsWlXW3eeXhNlMFX/xT9MPDwUzP50DTq22/tbXS', 'Mikko', 'Valtonen');
 INSERT INTO aktia_user(username, password, first_name, last_name) VALUES ('admin', '$2a$08$lDnHPz7eUkSi6ao14Twuau08mzhWrL4kyZGGU5xfiGALO/Vxd5DOi', 'Mirja', 'Jaakkola');
+INSERT INTO aktia_user(username, password, first_name, last_name) VALUES ('user', '$2y$12$xGykXS6w0fpGCvdsWlXW3eeXhNlMFX/xT9MPDwUzP50DTq22/tbXS', 'Mikko', 'Valtonen');
 
 -- CREATE TABLE AKTIA_ROLE
 

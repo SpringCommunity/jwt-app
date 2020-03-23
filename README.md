@@ -1,5 +1,12 @@
 # Json Web Token App
 
+## Reference
+- **https://www.toptal.com/java/rest-security-with-jwt-spring-security-and-java** REST Security with JWT using Java and Spring Security
+- **https://www.youtube.com/watch?v=X80nJ5T7YpE** Spring Boot + Spring Security + JWT from scratch - **Java Brains**
+- **https://www.baeldung.com/manually-set-user-authentication-spring-security** Manually set user authentication in **Spring Security**
+- **https://www.jsonwebtoken.io/** JSON Web Token documentation
+- **https://bcrypt-generator.com/** Free tool to encode password using **bcrypt**
+
 ## Content
 - Demostration how to protect web services using json web token in Spring MVC for Aktia interview
 
@@ -7,7 +14,7 @@
 - 21.03.2020
 
 ## Release
-- 23.03.2020
+- 24.03.2020
 
 ## Configuration
 - **spring shell** run spring shell
@@ -20,59 +27,10 @@
 
 ## Project structure
 
-''''
-├── src
-│   ├── main
-│   │   ├── java
-│   │   │   └── fi
-│   │   │       └── aktia
-│   │   │           └── demo
-│   │   │               └── jwtapp
-│   │   │                   ├── DemoApplication.java
-│   │   │                   ├── ServletInitializer.java
-│   │   │                   ├── bean
-│   │   │                   │   ├── PermissionBean.java
-│   │   │                   │   ├── RoleBean.java
-│   │   │                   │   └── UserBean.java
-│   │   │                   ├── config
-│   │   │                   │   ├── JwtAuthenticationEntryPoint.java
-│   │   │                   │   ├── JwtAuthenticationTokenFilter.java
-│   │   │                   │   ├── WebSecurityConfig.java
-│   │   │                   │   └── auth
-│   │   │                   │       ├── bean
-│   │   │                   │       │   ├── AuthRequestBean.java
-│   │   │                   │       │   ├── AuthResponseBean.java
-│   │   │                   │       │   └── AuthUserDetailsBean.java
-│   │   │                   │       ├── controller
-│   │   │                   │       │   └── AuthController.java
-│   │   │                   │       └── service
-│   │   │                   │           ├── AuthService.java
-│   │   │                   │           ├── AuthServiceImpl.java
-│   │   │                   │           └── AuthUserDetailsServiceImpl.java
-│   │   │                   ├── controller
-│   │   │                   │   ├── PermissionController.java
-│   │   │                   │   ├── RoleController.java
-│   │   │                   │   └── UserController.java
-│   │   │                   └── repository
-│   │   │                       ├── PermissionRepository.java
-│   │   │                       ├── RoleRepository.java
-│   │   │                       └── UserRepository.java
-│   │   ├── resources
-│   │   │   ├── application.properties
-│   │   │   ├── banner.txt
-│   │   │   ├── data.sql
-│   │   │   ├── static
-│   │   │   └── templates
-│   │   └── webapp
-│   └── test
-│       
-└── target
-  '''
   
-## Testing
+## Database connection
 - **spring.security.user.name=dev** set default user for **Spring Security**
 - **spring.security.user.password=99bbc2a8-70ba-4945-ac79-5da6c9eae268** set default password for **Spring Security**
-- **mvn spring-boot:run** starting project and open the following link **http://localhost:8080** using a browser.
 
 ## AWS demo user
 - **aktia-demo** username
@@ -83,9 +41,17 @@
 - **git remote add origin https://git-codecommit.us-east-1.amazonaws.com/v1/repos/jwt-app** declare a repository in git config file
 - **git add . && git commit -m "Initialized a spring boot project" && git push --set-upstream origin master** upload project to **CodeCommit** 
 
-## Demo
-- **curl -H "Content-Type: application/json" -X POST --data '{"username":"admin","password":"admin"}' http://localhost:8080/auth** request generating token
-- **curl -H "Authorization: eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1ODU1OTA3ODcsImlhdCI6MTU4NDk4NTk4N30.EiDutTBOpNYG7OVWbyHuu-1HBHHuK8yxBaoLNPN2G5N7P0hOIuNMH-in90VKZGDsetJzUOXlXLMveelW4TbHdg" http://localhost:8080/refresh** request refreshing token
+## Testing
+- **mvn spring-boot:run** starting project and open the following link **http://localhost:8080** using a browser.
+- **curl -H "Content-Type: application/json" -X POST --data '{"username":"admin","password":"admin"}' http://localhost:8080/auth** request to generate token for admin
+- **curl -H "Content-Type: application/json" -X POST --data '{"username":"user","password":"user"}' http://localhost:8080/auth** request to generate token for admin
+- **curl -H "Authorization: <ACCESS_TOKEN>" http://localhost:8080/refresh** request to refresh token
+- **curl -H "Authorization: <ADMIN_ROLE_ACCESS_TOKEN>" http://localhost:8080/api/v1/users** list all users from database
+- **curl -H "Authorization: <USER_ROLE_ACCESS_TOKEN>" http://localhost:8080/api/v1/users** 403 Forbidden
+- **curl -H "Authorization: <ADMIN_ROLE_ACCESS_TOKEN>" http://localhost:8080/api/v1/user/1** Get info admin
+- **curl -H "Authorization: <ADMIN_ROLE_ACCESS_TOKEN>" http://localhost:8080/api/v1/user/2** Get info user by admin
+- **curl -H "Authorization: <USER_ROLE_ACCESS_TOKEN>" http://localhost:8080/api/v1/user/2** Get info user by user
+ 
 
 ## Author
 - Dinh Duc Thinh
