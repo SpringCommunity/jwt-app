@@ -12,6 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import fi.aktia.demo.jwtapp.bean.PermissionBean;
 import fi.aktia.demo.jwtapp.repository.PermissionRepository;
 
+/**
+ * @Author Thinh Dinh
+ * @CreatedDate 24.03.2020
+ * @Title Full Stack Developer
+ */
+
 @CrossOrigin(origins= "*")
 @RestController
 @RequestMapping("/api/v1/")

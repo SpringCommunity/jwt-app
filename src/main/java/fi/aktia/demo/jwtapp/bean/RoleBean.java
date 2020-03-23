@@ -15,6 +15,12 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+/**
+ * @Author Thinh Dinh
+ * @CreatedDate 24.03.2020
+ * @Title Full Stack Developer
+ */
+
 @Entity
 @Table(name= "aktia_role")
 public class RoleBean {

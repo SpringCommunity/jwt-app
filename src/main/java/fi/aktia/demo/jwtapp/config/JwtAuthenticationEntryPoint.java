@@ -1,4 +1,4 @@
-package fi.aktia.demo.jwtapp.service;
+package fi.aktia.demo.jwtapp.config;
 
 import java.io.IOException;
 
@@ -8,7 +8,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.stereotype.Component;
 
+/**
+ * @Author Thinh Dinh
+ * @CreatedDate 24.03.2020
+ * @Title Full Stack Developer
+ */
+
+@Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
 	@Override

@@ -1,4 +1,4 @@
-package fi.aktia.demo.jwtapp.service;
+package fi.aktia.demo.jwtapp.config;
 
 import java.io.IOException;
 
@@ -14,9 +14,17 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import fi.aktia.demo.jwtapp.config.auth.service.AuthServiceImpl;
+import fi.aktia.demo.jwtapp.config.auth.service.AuthUserDetailsServiceImpl;
+
+/**
+ * @Author Thinh Dinh
+ * @CreatedDate 24.03.2020
+ * @Title Full Stack Developer
+ */
 
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 	
@@ -26,20 +34,21 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     private String header;
 	
 	@Autowired
-	private JwtServiceImpl jwtService;
+	private AuthServiceImpl authServiceImpl;
 	
 	@Autowired
-    private UserDetailsService userDetailsService;
+    private AuthUserDetailsServiceImpl userDetailsService;
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		String authToken = request.getHeader(this.header);
-		String username = jwtService.getUsernameFromToken(authToken);
+		logger.info("Requested token: "+ authToken);
+		String username = authServiceImpl.getUsernameFromToken(authToken);
 		logger.info("Checking authentication from username: "+ username);
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 			UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-			if(jwtService.validateToken(authToken, userDetails)) {
+			if(authServiceImpl.validateToken(authToken, userDetails)) {
 				UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 				auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 logger.info("authenticated " + username + ", setting security context");

@@ -18,6 +18,57 @@
 - **mvn eclipse:eclipse** run this command if you could not import project to eclipse
 - **mvn dependency:get -Dartifact=groupId:artifactId:version** use this command if you only want to download a single dependency
 
+## Project structure
+
+''''
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── fi
+│   │   │       └── aktia
+│   │   │           └── demo
+│   │   │               └── jwtapp
+│   │   │                   ├── DemoApplication.java
+│   │   │                   ├── ServletInitializer.java
+│   │   │                   ├── bean
+│   │   │                   │   ├── PermissionBean.java
+│   │   │                   │   ├── RoleBean.java
+│   │   │                   │   └── UserBean.java
+│   │   │                   ├── config
+│   │   │                   │   ├── JwtAuthenticationEntryPoint.java
+│   │   │                   │   ├── JwtAuthenticationTokenFilter.java
+│   │   │                   │   ├── WebSecurityConfig.java
+│   │   │                   │   └── auth
+│   │   │                   │       ├── bean
+│   │   │                   │       │   ├── AuthRequestBean.java
+│   │   │                   │       │   ├── AuthResponseBean.java
+│   │   │                   │       │   └── AuthUserDetailsBean.java
+│   │   │                   │       ├── controller
+│   │   │                   │       │   └── AuthController.java
+│   │   │                   │       └── service
+│   │   │                   │           ├── AuthService.java
+│   │   │                   │           ├── AuthServiceImpl.java
+│   │   │                   │           └── AuthUserDetailsServiceImpl.java
+│   │   │                   ├── controller
+│   │   │                   │   ├── PermissionController.java
+│   │   │                   │   ├── RoleController.java
+│   │   │                   │   └── UserController.java
+│   │   │                   └── repository
+│   │   │                       ├── PermissionRepository.java
+│   │   │                       ├── RoleRepository.java
+│   │   │                       └── UserRepository.java
+│   │   ├── resources
+│   │   │   ├── application.properties
+│   │   │   ├── banner.txt
+│   │   │   ├── data.sql
+│   │   │   ├── static
+│   │   │   └── templates
+│   │   └── webapp
+│   └── test
+│       
+└── target
+  '''
+  
 ## Testing
 - **spring.security.user.name=dev** set default user for **Spring Security**
 - **spring.security.user.password=99bbc2a8-70ba-4945-ac79-5da6c9eae268** set default password for **Spring Security**
@@ -33,6 +84,8 @@
 - **git add . && git commit -m "Initialized a spring boot project" && git push --set-upstream origin master** upload project to **CodeCommit** 
 
 ## Demo
+- **curl -H "Content-Type: application/json" -X POST --data '{"username":"admin","password":"admin"}' http://localhost:8080/auth** request generating token
+- **curl -H "Authorization: eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1ODU1OTA3ODcsImlhdCI6MTU4NDk4NTk4N30.EiDutTBOpNYG7OVWbyHuu-1HBHHuK8yxBaoLNPN2G5N7P0hOIuNMH-in90VKZGDsetJzUOXlXLMveelW4TbHdg" http://localhost:8080/refresh** request refreshing token
 
 ## Author
 - Dinh Duc Thinh

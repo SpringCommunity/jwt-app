@@ -5,7 +5,13 @@ import org.springframework.stereotype.Repository;
 
 import fi.aktia.demo.jwtapp.bean.UserBean;
 
+/**
+ * @Author Thinh Dinh
+ * @CreatedDate 24.03.2020
+ * @Title Full Stack Developer
+ */
+
 @Repository
 public interface UserRepository extends JpaRepository<UserBean, Integer>{
-
+    UserBean findByUsername(String username);
 }

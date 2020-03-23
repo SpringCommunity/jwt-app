@@ -14,6 +14,12 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * @Author Thinh Dinh
+ * @CreatedDate 24.03.2020
+ * @Title Full Stack Developer
+ */
+
 @Entity
 @Table(name= "aktia_permission")
 public class PermissionBean {
@@ -55,6 +61,14 @@ public class PermissionBean {
 
 	public void setUsers(List<UserBean> users) {
 		this.users = users;
+	}
+
+	public List<RoleBean> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<RoleBean> roles) {
+		this.roles = roles;
 	}
 	
 	

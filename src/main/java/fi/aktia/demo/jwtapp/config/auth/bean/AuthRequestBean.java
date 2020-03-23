@@ -1,14 +1,20 @@
-package fi.aktia.demo.jwtapp.bean;
+package fi.aktia.demo.jwtapp.config.auth.bean;
 
-public class AuthRequest {
+/**
+ * @Author Thinh Dinh
+ * @CreatedDate 24.03.2020
+ * @Title Full Stack Developer
+ */
+
+public class AuthRequestBean {
 
 	private String username;
 	private String password;
-	public AuthRequest() {
+	public AuthRequestBean() {
 		super();
 	}
 	
-	public AuthRequest(String username, String password) {
+	public AuthRequestBean(String username, String password) {
 		super();
 		this.username = username;
 		this.password = password;
