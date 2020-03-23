@@ -42,7 +42,7 @@ CREATE TABLE aktia_permission (
    FOREIGN KEY (fk_role_id) REFERENCES aktia_role(id)
 );
 
-INSERT INTO aktia_permission(fk_user_id, fk_role_id) VALUES (1,1), (2,1), (2,2);
+INSERT INTO aktia_permission(fk_user_id, fk_role_id) VALUES (1,1), (1,2), (2,1);
 
 -- SELECT USER WITH ROLE AND PERMISSION
 SELECT u.id, u.username, u.password, r.name FROM aktia_permission p JOIN aktia_user u on p.fk_user_id = u.id JOIN aktia_role r ON r.id = p.fk_role_id;
