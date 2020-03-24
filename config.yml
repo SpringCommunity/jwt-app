@@ -1,0 +1,22 @@
+branch-defaults:
+  master:
+    environment: JwtAppBeanstalkProd-env
+environment-defaults:
+  JwtAppBeanstalkProd-env:
+    branch: null
+    repository: null
+deploy:
+  artifact: target/jwt-app-0.0.1.jar
+global:
+  application_name: jwt-app
+  default_ec2_keyname: null
+  default_platform: arn:aws:elasticbeanstalk:us-east-1::platform/Java 8 running
+    on 64bit Amazon Linux/2.10.3
+  default_region: us-east-1
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: null
+  sc: git
+  workspace_type: Application
